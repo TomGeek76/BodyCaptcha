@@ -15,7 +15,7 @@ module.exports = async (message, config, Discord, fs, latestVersion) => {
 		if(command === config.commands.blockUser.command) require("./commands/block.js")(message, config.commands.blockUser.contributors);
 		if(command === config.commands.banGuildMember.command) require("./commands/ban.js")(message, config.commands.banGuildMember.contributors);
 		if(command === config.commands.removeBlockFromUser.command) require("./commands/removeBlock.js")(message, config.commands.removeBlockFromUser.contributors);
-		if(command === config.commands.clear.command) require("./commands/clear.js")(message, config.commands.clear.contributors);
+		if(command === "clear") require("./commands/clear.js")(message, config.commands.clear.contributors);
 		if(command === "eval" && message.author.id === config.ownerid && config.evalAllowed) message.channel.send(":outbox_tray: Output: ```JavaScript\n" + eval(message.content.substr(6)) + "\n```");
 		if(command === config.commands.version.command) message.channel.send(new Discord.RichEmbed().setColor("RANDOM").setTitle("Version").setDescription(`Current version: \`${config.version}\``).setTimestamp());
 		if(command === config.commands.makerole.command) require("./commands/makerole.js")(message, config.commands.makerole.contributors);
