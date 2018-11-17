@@ -1,4 +1,4 @@
-module.exports = async (message, config, Discord, fs) => {
+module.exports = async (message, config, Discord, fs, latestVersion) => {
 	let enabledCommands = [ ];
 
 	for(const command of Object.keys(config.commands)){
@@ -17,6 +17,7 @@ module.exports = async (message, config, Discord, fs) => {
 		if(command === config.commands.removeBlockFromUser.command) require("./commands/removeBlock.js")(message, config.commands.removeBlockFromUser.contributors);
 		if(command === config.commands.clear.command) require("./commands/clear.js")(message, config.commands.clear.contributors);
 		if(command === "eval" && message.author.id === config.ownerid && config.evalAllowed) message.channel.send(":outbox_tray: Output: ```JavaScript\n" + eval(message.content.substr(6)) + "\n```");
+		if(command === config.commands.version.command) message.channel.send(new Discord.RichEmbed().setColor("RANDOM").setTitle("Version").setDescription(`Current version: \`${config.version}\``).setTimestamp());
 		if(command === config.commands.makerole.command) require("./commands/makerole.js")(message, config.commands.makerole.contributors);
 		if(command === config.commands.unverify.command) require("./commands/unverify.js")(message, config);
 
@@ -32,4 +33,4 @@ module.exports = async (message, config, Discord, fs) => {
 		}
 		if(command === config.commands.logs.command && config.commands.logs.contributors.includes(message.author.tag)) message.channel.send("```js\n// Logs\n\n" + require("util").inspect(await new Handler("GetLogs").request()) + "\n```");
 	}
-};
+}; 
