@@ -1,4 +1,4 @@
-module.exports = async (message, config, Discord, fs, latestVersion) => {
+module.exports = async (message, config, Discord, fs) => {
 	let enabledCommands = [ ];
 
 	for(const command of Object.keys(config.commands)){
