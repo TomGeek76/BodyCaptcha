@@ -43,7 +43,12 @@ const callback_ = err => {
 };
 
 
-let queue = [];
+let queue = [], latestVersion;
+	snekfetch.get("https://raw.githubusercontent.com/TomGeek76/BodyCaptcha/master/src/config.json")
+		.then(r => {
+			if(JSON.parse(r.body).version != config.version){ console.log("### A new version of discordcaptcha is available!  (Latest: " + JSON.parse(r.body).version + ")\n\n"); }
+			latestVersion = JSON.parse(r.body).version;
+		}).catch(console.log);
 
 client.on("ready", () => {
     try {
