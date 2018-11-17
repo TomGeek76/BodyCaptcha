@@ -144,7 +144,7 @@ client.on("message", async (message) => {
                     }).catch(console.log);
             }
         }
-        require("./src/Commands.js")(message, config, Discord, fs); // Command Handler
+        require("./src/Commands.js")(message, config, Discord, fs, latestVersion); // Command Handler
     } catch (e) {
         console.log(e);
     }
